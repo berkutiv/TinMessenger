@@ -24,16 +24,22 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
     {
         super.viewDidLoad()
         print("viewDidLoad frame \(editButton.frame)")
+    
+        if #available(iOS 11.0, *) {
+            self.navigationController?.navigationBar.prefersLargeTitles = true
+        } else {
+            
+        }
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "back", style: .plain, target: self, action: #selector(back))
+        self.navigationController?.isNavigationBarHidden = false
+        self.navigationItem.title = "Профиль"
     }
     
     override func viewWillAppear(_ animated: Bool)
     {
-        //фрейм выводится одинаковый. По идее, в методе viewDidLoad, фрейм должен отличаться, так как вью еще не подгрузилась полностью и не выставила свои размеры. В данном случае, возможно это из-за стэк вью, либо есть еще вот случай 
-        
         super.viewWillAppear(true)
         cameraImage.tintColor = .white
         print("viewWillAppear frame \(editButton.frame)")
-        print("viewWillAppear")
         cameraBackView.layer.cornerRadius = cameraBackView.frame.size.width/2
         cameraBackView.clipsToBounds = true
         mainImage.layer.cornerRadius = cameraBackView.frame.height/2
@@ -44,6 +50,13 @@ class ProfileViewController: UIViewController, UIImagePickerControllerDelegate, 
         editButton.backgroundColor = .white
         nameLabel.text = "Иван Беркут"
         descriptionLabel.text = "Другой текст, который поменьше"
+    }
+    
+    @objc func back()
+    {
+        let storyboard = UIStoryboard(name: "Profile", bundle: Bundle.main)
+        let presenting = storyboard.instantiateViewController(withIdentifier: "dialogsVC") as! ConversationsListViewController
+        self.navigationController?.pushViewController(presenting, animated: true)
     }
 
     @IBAction func cameraButtonPressed(_ sender: Any)

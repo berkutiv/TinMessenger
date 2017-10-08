@@ -23,7 +23,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Разрешите сделать фотографию </string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Выбрать фотографии из галереи</string>
+	<string>Выбрать фотографии из галере</string>
 	<key>UIApplicationExitsOnSuspend</key>
 	<false/>
 	<key>UILaunchStoryboardName</key>
